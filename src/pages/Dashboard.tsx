@@ -27,10 +27,10 @@ const Dashboard: React.FC = () => {
 
   return (
     <MainLayout>
-      <div className="py-8 px-4 md:py-12 md:px-6 lg:py-16 lg:px-8">
+      <div className="py-6 px-4 md:py-8 lg:py-10">
         <div className="max-w-5xl mx-auto">
-          <div className="mb-10 text-center">
-            <h1 className="text-3xl font-bold mb-2">Welcome to Aelix Dashboard</h1>
+          <div className="mb-8 text-center">
+            <h1 className="text-3xl font-bold mb-2">Welcome to Aelix</h1>
             <p className="text-muted-foreground">
               Your AI assistant for Monad blockchain operations
             </p>

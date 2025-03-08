@@ -69,24 +69,24 @@ const ChatInterface: React.FC = () => {
 
   return (
     <div className="flex flex-col h-full rounded-2xl overflow-hidden shadow-lg bg-white/5 backdrop-blur-sm border border-white/10">
-      <div className="px-4 py-3 border-b bg-muted/30">
-        <h2 className="font-semibold text-center">Aelix AI Assistant</h2>
+      <div className="p-3 border-b bg-muted/30">
+        <h2 className="font-medium text-center">Aelix AI</h2>
       </div>
       
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-3 md:p-4 space-y-3 md:space-y-4">
         {messages.map((message, index) => (
           <div 
             key={index} 
             className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div 
-              className={`max-w-[85%] px-4 py-3 ${
+              className={`max-w-[85%] px-3 py-2 md:px-4 md:py-3 ${
                 message.role === 'user' 
                   ? 'bg-primary text-primary-foreground rounded-2xl rounded-tr-sm' 
                   : 'bg-muted/70 text-foreground rounded-2xl rounded-tl-sm'
               }`}
             >
-              <div className="whitespace-pre-wrap">{message.content}</div>
+              <div className="whitespace-pre-wrap text-sm md:text-base">{message.content}</div>
               <div className={`text-xs mt-1 ${
                 message.role === 'user' ? 'text-primary-foreground/70' : 'text-muted-foreground'
               }`}>
@@ -98,21 +98,21 @@ const ChatInterface: React.FC = () => {
         <div ref={messagesEndRef} />
       </div>
       
-      <form onSubmit={handleSubmit} className="border-t p-4">
+      <form onSubmit={handleSubmit} className="border-t p-3">
         <div className="flex gap-2 relative">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type a command or ask a question..."
-            className="w-full px-4 py-3 rounded-full bg-background border focus:outline-none focus:ring-2 focus:ring-primary/50 pr-12"
+            className="w-full px-3 py-2 md:px-4 md:py-3 rounded-full bg-background border focus:outline-none focus:ring-2 focus:ring-primary/50 pr-10 md:pr-12 text-sm md:text-base"
           />
           <button
             type="submit"
-            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 md:p-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
             aria-label="Send message"
           >
-            <Send size={18} />
+            <Send size={16} className="md:size-[18px]" />
           </button>
         </div>
       </form>

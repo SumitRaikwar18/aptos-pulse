@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Wallet, Home, BookOpen, LineChart } from 'lucide-react';
+import { Menu, X, Wallet, Home } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { usePrivy } from '@privy-io/react-auth';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -37,15 +37,15 @@ const Navbar: React.FC = () => {
     <header 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-elastic",
-        isScrolled ? "py-3" : "py-5",
+        isScrolled ? "py-2" : "py-3",
         "bg-background/80 backdrop-blur-lg border-b border-border/40"
       )}
     >
-      <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
+      <div className="container mx-auto px-4 flex items-center justify-between">
         <a href="/" className="text-xl font-bold">Aelix</a>
         
-        <div className="flex items-center space-x-1 sm:space-x-4">
-          <nav className="hidden md:flex items-center space-x-6">
+        <div className="flex items-center gap-4">
+          <nav className="hidden md:flex items-center space-x-4">
             {!isDashboard && (
               <>
                 <a href="/" className="text-foreground/80 hover:text-primary transition-colors">
@@ -56,9 +56,6 @@ const Navbar: React.FC = () => {
                 </a>
                 <a href="#roadmap" className="text-foreground/80 hover:text-primary transition-colors">
                   Roadmap
-                </a>
-                <a href="/documentation" className="text-foreground/80 hover:text-primary transition-colors">
-                  Docs
                 </a>
               </>
             )}
@@ -88,8 +85,8 @@ const Navbar: React.FC = () => {
       
       {/* Mobile menu */}
       {mobileMenuOpen && !isDashboard && (
-        <div className="md:hidden py-4 px-4 bg-background/95 border-b border-border/40">
-          <nav className="flex flex-col space-y-4">
+        <div className="md:hidden py-2 px-4 bg-background/95 border-b border-border/40">
+          <nav className="flex flex-col space-y-2">
             <a 
               href="/"
               className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors"
@@ -110,13 +107,6 @@ const Navbar: React.FC = () => {
               onClick={() => setMobileMenuOpen(false)}
             >
               Roadmap
-            </a>
-            <a 
-              href="/documentation"
-              className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Docs
             </a>
           </nav>
         </div>
