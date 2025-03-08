@@ -1,12 +1,20 @@
 
-import React, { useEffect, useRef } from 'react';
-import { ArrowDownCircle } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowRightIcon } from 'lucide-react';
+import { AnimatedShinyText } from './ui/AnimatedShinyText';
+import { usePrivy } from '@privy-io/react-auth';
+import { useNavigate } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
+  const { login, authenticated } = usePrivy();
+  const navigate = useNavigate();
+
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   useEffect(() => {
     const observerOptions = {
@@ -46,12 +54,23 @@ const Hero: React.FC = () => {
     };
   }, []);
   
-  const scrollToFeatures = () => {
-    const featuresSection = document.getElementById('features');
-    if (featuresSection) {
-      featuresSection.scrollIntoView({ behavior: 'smooth' });
+  const handleConnectWallet = async () => {
+    if (authenticated) {
+      navigate('/dashboard');
+    } else {
+      login();
     }
   };
+
+  // Dynamically import the Sidebar component to avoid the circular dependency
+  const [SidebarComponent, setSidebarComponent] = useState<React.ComponentType<{ isOpen: boolean; onClose: () => void }> | null>(null);
+
+  useEffect(() => {
+    // Dynamic import
+    import('./Sidebar').then((module) => {
+      setSidebarComponent(() => module.default);
+    });
+  }, []);
 
   return (
     <section 
@@ -71,31 +90,48 @@ const Hero: React.FC = () => {
           className="text-balance opacity-0 mb-6"
         >
           <span className="block font-medium text-base md:text-lg text-muted-foreground mb-4">Introducing</span>
-          Redefining Experiences with Precision and Elegance
+          <AnimatedShinyText className="font-bold text-4xl md:text-5xl lg:text-6xl">
+            Empower Tomorrow: Your AI Ally on Monad Testnet
+          </AnimatedShinyText>
         </h1>
         
         <p 
           ref={subtitleRef}
           className="text-balance opacity-0 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12"
         >
-          Aelix combines sophisticated design with intuitive functionality to create seamless interactions that feel natural and effortless.
+          Aelix combines advanced AI capabilities with the power of Monad blockchain to create a seamless, intuitive experience for managing digital assets.
         </p>
         
         <div 
           ref={buttonRef}
-          className="opacity-0 flex flex-col items-center justify-center"
+          className="opacity-0 flex flex-col items-center justify-center space-y-4"
         >
           <button 
-            onClick={scrollToFeatures}
+            onClick={handleConnectWallet}
             className="group relative overflow-hidden rounded-full bg-primary px-8 py-3 text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:px-10"
           >
             <span className="relative z-10 flex items-center gap-2">
-              Discover More
-              <ArrowDownCircle size={18} className="transition-transform group-hover:translate-y-1" />
+              {authenticated ? "Go to Dashboard" : "Connect Wallet"}
+              <ArrowRightIcon className="transition-transform group-hover:translate-x-1" />
             </span>
+          </button>
+          
+          <button 
+            onClick={() => setIsAboutOpen(true)}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors underline"
+          >
+            Learn more
           </button>
         </div>
       </div>
+      
+      {/* Render the Sidebar component if it's loaded */}
+      {SidebarComponent && (
+        <SidebarComponent 
+          isOpen={isAboutOpen} 
+          onClose={() => setIsAboutOpen(false)} 
+        />
+      )}
     </section>
   );
 };

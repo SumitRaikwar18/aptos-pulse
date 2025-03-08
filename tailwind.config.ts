@@ -105,7 +105,11 @@ export default {
 				'float': {
 					'0%, 100%': { transform: 'translateY(0)' },
 					'50%': { transform: 'translateY(-10px)' }
-				}
+				},
+				'shiny': {
+					'0%': { transform: 'translateX(-100%)' },
+					'20%, 100%': { transform: 'translateX(100%)' }
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -115,7 +119,8 @@ export default {
 				'slide-in': 'slide-in 0.5s ease-out forwards',
 				'blur-in': 'blur-in 0.6s ease-out forwards',
 				'scale-in': 'scale-in 0.4s ease-out forwards',
-				'float': 'float 6s ease-in-out infinite'
+				'float': 'float 6s ease-in-out infinite',
+				'shiny': 'shiny 4s ease-in-out infinite',
 			},
 			transitionTimingFunction: {
 				'elastic': 'cubic-bezier(0.76, 0, 0.24, 1)',
