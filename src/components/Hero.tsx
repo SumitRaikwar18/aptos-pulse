@@ -90,7 +90,7 @@ const Hero: React.FC = () => {
           ref={titleRef}
           className="text-balance opacity-0 mb-6"
         >
-          <span className="block font-medium text-base md:text-lg text-muted-foreground mb-4">Introducing</span>
+          <span className="block font-medium text-base md:text-lg text-muted-foreground mb-4">Introducing Aelix | AI Agent On Monad</span>
           <AnimatedShinyText className="font-bold text-4xl md:text-5xl lg:text-6xl">
             <AnimatedGradientText>
               Empower Tomorrow: Your AI Ally on Monad Testnet

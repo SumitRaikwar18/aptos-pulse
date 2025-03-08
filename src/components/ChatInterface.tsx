@@ -70,7 +70,7 @@ const ChatInterface: React.FC = () => {
   return (
     <div className="flex flex-col h-full rounded-2xl overflow-hidden shadow-lg bg-white/5 backdrop-blur-sm border border-white/10">
       <div className="p-3 border-b bg-muted/30">
-        <h2 className="font-medium text-center">Aelix AI</h2>
+        <h2 className="font-medium text-center">AI Assistant</h2>
       </div>
       
       <div className="flex-1 overflow-y-auto p-3 md:p-4 space-y-3 md:space-y-4">

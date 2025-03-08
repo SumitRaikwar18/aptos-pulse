@@ -1,14 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Wallet, Home } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { usePrivy } from '@privy-io/react-auth';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { login, authenticated, user, logout } = usePrivy();
+  const { login, authenticated, logout } = usePrivy();
   const location = useLocation();
   const navigate = useNavigate();
   const isDashboard = location.pathname === '/dashboard';
@@ -45,22 +43,6 @@ const Navbar: React.FC = () => {
         <a href="/" className="text-xl font-bold">Aelix</a>
         
         <div className="flex items-center gap-4">
-          <nav className="hidden md:flex items-center space-x-4">
-            {!isDashboard && (
-              <>
-                <a href="/" className="text-foreground/80 hover:text-primary transition-colors">
-                  Home
-                </a>
-                <a href="#features" className="text-foreground/80 hover:text-primary transition-colors">
-                  Features
-                </a>
-                <a href="#roadmap" className="text-foreground/80 hover:text-primary transition-colors">
-                  Roadmap
-                </a>
-              </>
-            )}
-          </nav>
-          
           <button 
             onClick={isDashboard ? () => logout() : handleConnectWallet}
             className={cn(
@@ -72,45 +54,8 @@ const Navbar: React.FC = () => {
           >
             {isDashboard ? "Disconnect" : (authenticated ? "Dashboard" : "Connect Wallet")}
           </button>
-          
-          <button
-            className="md:hidden p-2 text-foreground/80 hover:text-primary transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
       </div>
-      
-      {/* Mobile menu */}
-      {mobileMenuOpen && !isDashboard && (
-        <div className="md:hidden py-2 px-4 bg-background/95 border-b border-border/40">
-          <nav className="flex flex-col space-y-2">
-            <a 
-              href="/"
-              className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Home
-            </a>
-            <a 
-              href="#features"
-              className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Features
-            </a>
-            <a 
-              href="#roadmap"
-              className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Roadmap
-            </a>
-          </nav>
-        </div>
-      )}
     </header>
   );
 };
