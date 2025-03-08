@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Home, Code, Map, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -78,7 +78,6 @@ const Navbar: React.FC = () => {
               className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors flex items-center gap-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <Home size={18} />
               Home
             </a>
             <a 
@@ -86,7 +85,6 @@ const Navbar: React.FC = () => {
               className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors flex items-center gap-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <Code size={18} />
               Features
             </a>
             <a 
@@ -94,41 +92,9 @@ const Navbar: React.FC = () => {
               className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors flex items-center gap-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <Map size={18} />
               Roadmap
             </a>
           </nav>
-        </div>
-      )}
-
-      {/* Dock Menu - Only on landing page */}
-      {!isDashboard && (
-        <div className="hidden md:block fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
-          <div className="bg-background/80 backdrop-blur-lg border border-border/40 rounded-full px-6 py-3 shadow-lg">
-            <nav className="flex items-center space-x-8">
-              <a 
-                href="/" 
-                className="text-foreground/80 hover:text-primary transition-colors flex flex-col items-center"
-              >
-                <Home className="mb-1" size={20} />
-                <span className="text-xs">Home</span>
-              </a>
-              <a 
-                href="#features" 
-                className="text-foreground/80 hover:text-primary transition-colors flex flex-col items-center"
-              >
-                <Code className="mb-1" size={20} />
-                <span className="text-xs">Features</span>
-              </a>
-              <a 
-                href="#roadmap" 
-                className="text-foreground/80 hover:text-primary transition-colors flex flex-col items-center"
-              >
-                <Map className="mb-1" size={20} />
-                <span className="text-xs">Roadmap</span>
-              </a>
-            </nav>
-          </div>
         </div>
       )}
     </header>
