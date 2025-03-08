@@ -33,68 +33,94 @@ const Navbar: React.FC = () => {
     }
   };
 
-  const navItems = isDashboard 
-    ? [] // Empty for dashboard
-    : ['Home', 'Features', 'Roadmap'];
-
   return (
     <header 
       className={cn(
-        "fixed bottom-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ease-elastic py-2 px-6 md:px-8",
-        "rounded-full mb-4 backdrop-blur-xl bg-white/80 shadow-lg border border-border/40",
-        "w-auto flex items-center justify-center"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-elastic",
+        isScrolled ? "py-3" : "py-5",
+        "bg-background/80 backdrop-blur-lg border-b border-border/40"
       )}
     >
-      <div className="flex items-center gap-6 md:gap-10">
-        <a 
-          href="/"
-          className="p-2 text-foreground/80 hover:text-primary transition-colors flex flex-col items-center"
-          aria-label="Home"
-        >
-          <Home size={20} />
-          <span className="text-xs mt-1">Home</span>
-        </a>
+      <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
+        <a href="/" className="text-xl font-bold">Aelix</a>
         
-        <a 
-          href="#features"
-          className="p-2 text-foreground/80 hover:text-primary transition-colors flex flex-col items-center"
-          aria-label="Features"
-        >
-          <LineChart size={20} />
-          <span className="text-xs mt-1">Features</span>
-        </a>
-        
-        <a 
-          href="#roadmap"
-          className="p-2 text-foreground/80 hover:text-primary transition-colors flex flex-col items-center"
-          aria-label="Roadmap"
-        >
-          <LineChart size={20} />
-          <span className="text-xs mt-1">Roadmap</span>
-        </a>
-        
-        <a 
-          href="/documentation"
-          className="p-2 text-foreground/80 hover:text-primary transition-colors flex flex-col items-center"
-          aria-label="Documentation"
-        >
-          <BookOpen size={20} />
-          <span className="text-xs mt-1">Docs</span>
-        </a>
-        
-        <button 
-          onClick={isDashboard ? () => logout() : handleConnectWallet}
-          className={cn(
-            "flex flex-col items-center p-2 transition-colors",
-            isDashboard
-              ? "text-destructive hover:text-destructive/80"
-              : "text-primary hover:text-primary/80"
-          )}
-        >
-          <Wallet size={20} />
-          <span className="text-xs mt-1">{isDashboard ? "Logout" : (authenticated ? "Dashboard" : "Connect")}</span>
-        </button>
+        <div className="flex items-center space-x-1 sm:space-x-4">
+          <nav className="hidden md:flex items-center space-x-6">
+            {!isDashboard && (
+              <>
+                <a href="/" className="text-foreground/80 hover:text-primary transition-colors">
+                  Home
+                </a>
+                <a href="#features" className="text-foreground/80 hover:text-primary transition-colors">
+                  Features
+                </a>
+                <a href="#roadmap" className="text-foreground/80 hover:text-primary transition-colors">
+                  Roadmap
+                </a>
+                <a href="/documentation" className="text-foreground/80 hover:text-primary transition-colors">
+                  Docs
+                </a>
+              </>
+            )}
+          </nav>
+          
+          <button 
+            onClick={isDashboard ? () => logout() : handleConnectWallet}
+            className={cn(
+              "px-4 py-2 rounded-lg transition-colors",
+              isDashboard
+                ? "bg-destructive/10 text-destructive hover:bg-destructive/20"
+                : "bg-primary text-primary-foreground hover:bg-primary/90"
+            )}
+          >
+            {isDashboard ? "Disconnect" : (authenticated ? "Dashboard" : "Connect Wallet")}
+          </button>
+          
+          <button
+            className="md:hidden p-2 text-foreground/80 hover:text-primary transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
+      
+      {/* Mobile menu */}
+      {mobileMenuOpen && !isDashboard && (
+        <div className="md:hidden py-4 px-4 bg-background/95 border-b border-border/40">
+          <nav className="flex flex-col space-y-4">
+            <a 
+              href="/"
+              className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Home
+            </a>
+            <a 
+              href="#features"
+              className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Features
+            </a>
+            <a 
+              href="#roadmap"
+              className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Roadmap
+            </a>
+            <a 
+              href="/documentation"
+              className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Docs
+            </a>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
