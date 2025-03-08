@@ -77,7 +77,7 @@ const Hero: React.FC = () => {
     <section 
       id="home" 
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center section-padding overflow-hidden"
     >
       {/* Background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -100,7 +100,7 @@ const Hero: React.FC = () => {
         
         <p 
           ref={subtitleRef}
-          className="text-balance opacity-0 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
+          className="text-balance opacity-0 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12"
         >
           Aelix combines advanced AI capabilities with the power of Monad blockchain to create a seamless, intuitive experience for managing digital assets.
         </p>
@@ -112,7 +112,7 @@ const Hero: React.FC = () => {
           <div className="flex flex-wrap gap-4 justify-center">
             <button 
               onClick={handleGetStarted}
-              className="group relative overflow-hidden rounded-full bg-gradient-to-r from-primary to-purple-500 px-8 py-3 text-white transition-all duration-300 hover:opacity-90 hover:px-10"
+              className="group relative overflow-hidden rounded-full bg-primary px-8 py-3 text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:px-10"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Get Started

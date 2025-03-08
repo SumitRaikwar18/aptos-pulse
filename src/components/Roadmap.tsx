@@ -1,141 +1,153 @@
 
-import React, { useState } from 'react';
-import { LucideIcon, Lightbulb, Rocket, Zap, Trophy } from 'lucide-react';
+import React from 'react';
 import RevealOnScroll from './ui/RevealOnScroll';
-import { cn } from '@/lib/utils';
+import { CheckIcon, Clock, Calendar, Globe } from 'lucide-react';
 
-interface RoadmapItemProps {
+interface RoadmapPhase {
+  status: 'completed' | 'in-progress' | 'upcoming' | 'future';
+  phase: string;
   title: string;
   description: string;
-  date: string;
-  icon: LucideIcon;
-  status: 'completed' | 'current' | 'upcoming';
-  isLast?: boolean;
+  items: Array<{
+    text: string;
+    completed: boolean;
+  }>;
+  icon: React.ComponentType<{ size?: number }>;
 }
 
-const RoadmapItem: React.FC<RoadmapItemProps> = ({ 
-  title, 
-  description, 
-  date, 
-  icon: Icon, 
-  status, 
-  isLast = false 
-}) => {
+const RoadmapItem: React.FC<{ phase: RoadmapPhase; index: number }> = ({ phase, index }) => {
   return (
-    <div className="flex relative">
-      <div className="flex flex-col items-center mr-6">
-        <div className={cn(
-          "flex items-center justify-center w-12 h-12 rounded-full z-10",
-          status === 'completed' ? "bg-primary/20 text-primary" :
-          status === 'current' ? "bg-primary text-primary-foreground" :
-          "bg-secondary text-secondary-foreground"
-        )}>
-          <Icon size={24} />
+    <RevealOnScroll delay={index * 100}>
+      <div className="relative pl-8 pb-12 border-l border-primary/20 last:border-0 ml-4">
+        <div className="absolute left-0 top-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center transform -translate-x-1/2">
+          <phase.icon size={16} className="text-primary" />
         </div>
-        {!isLast && (
-          <div className={cn(
-            "w-0.5 h-full mt-3",
-            status === 'completed' ? "bg-primary/60" : "bg-muted"
-          )} />
-        )}
-      </div>
-      <div className="pt-1 pb-8">
-        <div className="flex items-center mb-1">
-          <h3 className="text-xl font-semibold mr-3">{title}</h3>
+        <div className="flex flex-wrap items-center gap-2 mb-3">
           <span className={cn(
-            "text-xs font-medium px-2 py-1 rounded-full",
-            status === 'completed' ? "bg-primary/10 text-primary" :
-            status === 'current' ? "bg-primary/80 text-primary-foreground" :
-            "bg-muted text-muted-foreground"
+            "inline-block px-3 py-1 text-xs font-medium rounded-full",
+            phase.status === 'completed' ? "bg-green-500/10 text-green-500" :
+            phase.status === 'in-progress' ? "bg-amber-500/10 text-amber-500" :
+            phase.status === 'upcoming' ? "bg-blue-500/10 text-blue-500" :
+            "bg-purple-500/10 text-purple-500"
           )}>
-            {status === 'completed' ? 'Completed' : 
-             status === 'current' ? 'In Progress' : 'Upcoming'}
+            {phase.phase}
           </span>
+          {phase.status === 'completed' && 
+            <span className="inline-block px-3 py-1 text-xs font-medium bg-green-500/10 text-green-500 rounded-full">
+              Completed
+            </span>
+          }
+          {phase.status === 'in-progress' && 
+            <span className="inline-block px-3 py-1 text-xs font-medium bg-amber-500/10 text-amber-500 rounded-full">
+              In Progress
+            </span>
+          }
         </div>
-        <time className="block text-sm text-muted-foreground mb-2">{date}</time>
-        <p className="text-foreground/80">{description}</p>
+        <h3 className="text-xl font-semibold mb-2">{phase.title}</h3>
+        <p className="text-muted-foreground mb-4">{phase.description}</p>
+        
+        <ul className="space-y-2">
+          {phase.items.map((item, i) => (
+            <li key={i} className="flex items-start gap-2">
+              {item.completed ? (
+                <CheckIcon size={16} className="text-green-500 mt-1 shrink-0" />
+              ) : (
+                <div className="w-4 h-4 border border-muted-foreground/40 rounded mt-0.5 shrink-0" />
+              )}
+              <span className={cn(
+                "text-sm",
+                item.completed ? "text-foreground" : "text-muted-foreground"
+              )}>
+                {item.text}
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
-    </div>
+    </RevealOnScroll>
   );
 };
 
+// Helper function for className conditional joining
+const cn = (...classes: (string | boolean | undefined)[]) => {
+  return classes.filter(Boolean).join(' ');
+};
+
 const Roadmap: React.FC = () => {
-  const [displayCount, setDisplayCount] = useState(4);
-  
-  const roadmapItems = [
+  const roadmapPhases: RoadmapPhase[] = [
     {
-      title: "Project Inception",
-      description: "Initial concept development, team formation, and preparation of Monad Testnet exploration.",
-      date: "January 2024",
-      icon: Lightbulb,
-      status: 'completed' as const,
+      status: 'completed',
+      phase: "Phase 1",
+      title: "Testnet Launch & Core Features",
+      description: "Aelix successfully launched on Monad Testnet (Chain ID: 10143) with core AI functionality.",
+      icon: CheckIcon,
+      items: [
+        { text: "Wallet & Transactions: setWallet, getWalletAddress, getBalance, transferTokens, signMessage, getTransactionHistory", completed: true },
+        { text: "Gas & Token Tools: getGasPrice, getTokenPrice, getTrendingTokens, createToken, getFaucetTokens", completed: true },
+        { text: "Faucet Integration: Testnet MON tokens claimable via testnet.monad.xyz", completed: true },
+        { text: "Public Beta Testing: Core AI tools fully functional & tested", completed: true }
+      ]
     },
     {
-      title: "Alpha Release",
-      description: "First functional version with core wallet features and basic Monad Testnet integration.",
-      date: "March 2024",
-      icon: Rocket,
-      status: 'completed' as const,
+      status: 'in-progress',
+      phase: "Phase 2",
+      title: "Yield Optimization & Advanced AI Capabilities",
+      description: "Expanding Aelix's AI functionalities to include staking, governance, and yield optimization.",
+      icon: Clock,
+      items: [
+        { text: "AI-Driven Governance: Deploy createGovernance for community-based decision-making", completed: false },
+        { text: "AI Proposal Engine: Suggest governance proposals based on user activity & transaction trends", completed: false },
+        { text: "Staking & Rewards: Implement stakeTokens for MON and Aelix-created ERC-20 tokens", completed: false },
+        { text: "Smart Yield Optimization: AI-powered staking strategies based on real-time gas fees & market conditions", completed: false },
+        { text: "Token Price Fetching: Integrated CoinGecko for real-time MONAD price updates", completed: true },
+        { text: "Multi-Token Support: Extend transferTokens & getBalance to support custom Aelix ERC-20 tokens", completed: false },
+        { text: "AI-Powered Market Insights: Predict token trends & portfolio optimization strategies", completed: false }
+      ]
     },
     {
-      title: "Beta Launch",
-      description: "Enhanced capabilities including token creation, automated transactions, and improved UI/UX.",
-      date: "June 2024",
-      icon: Zap,
-      status: 'current' as const,
+      status: 'upcoming',
+      phase: "Phase 3",
+      title: "Mainnet Integration",
+      description: "Full integration with Monad mainnet, offering production-ready AI tools for blockchain operations.",
+      icon: Calendar,
+      items: [
+        { text: "Risk Model v1: AI-driven risk assessment for transactions (gas fees vs. token value)", completed: false },
+        { text: "Mainnet Migration: Upgrade all AI tools for production-ready blockchain operations", completed: false }
+      ]
     },
     {
-      title: "Full Platform Release",
-      description: "Complete feature set with advanced tools for Monad blockchain interaction and community features.",
-      date: "September 2024",
-      icon: Trophy,
-      status: 'upcoming' as const,
-    },
-    {
+      status: 'future',
+      phase: "Phase 4",
       title: "Ecosystem Expansion",
-      description: "Integration with additional blockchain services, cross-chain compatibility, and enterprise tools.",
-      date: "December 2024",
-      icon: Rocket,
-      status: 'upcoming' as const,
+      description: "Partnerships with key DeFi protocols and development of custom AI agents tailored to Monad.",
+      icon: Globe,
+      items: [
+        { text: "Advanced Yield Optimization: AI-automated yield farming & staking maximization", completed: false },
+        { text: "Ecosystem Partnerships: Integrate Aelix with Monad-native DeFi platforms (DEXes, lending protocols)", completed: false },
+        { text: "Custom AI Agents: Specialized AI-driven bots for trading, lending, and governance", completed: false }
+      ]
     }
   ];
-  
-  const displayedItems = roadmapItems.slice(0, displayCount);
-  const hasMore = displayCount < roadmapItems.length;
-  
+
   return (
-    <section id="roadmap" className="section-padding bg-secondary/30">
+    <section id="roadmap" className="section-padding">
       <div className="max-w-7xl mx-auto">
         <RevealOnScroll>
-          <div className="text-center mb-12">
-            <span className="inline-block px-3 py-1 text-xs font-medium text-primary bg-primary/10 rounded-full mb-4">Roadmap</span>
-            <h2 className="text-3xl md:text-4xl font-semibold mb-4">Our Journey</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore our development timeline as we build and enhance Aelix for the Monad ecosystem.
+          <div className="text-center mb-16">
+            <span className="inline-block px-3 py-1 text-xs font-medium text-primary bg-primary/10 rounded-full mb-4">
+              Roadmap
+            </span>
+            <h2 className="text-balance mb-4">🚀 Our Journey Forward</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              The evolution of Aelix on the Monad blockchain, from concept to ecosystem.
             </p>
           </div>
         </RevealOnScroll>
-        
+
         <div className="max-w-3xl mx-auto">
-          {displayedItems.map((item, index) => (
-            <RevealOnScroll key={item.title} delay={index * 100}>
-              <RoadmapItem
-                {...item}
-                isLast={index === displayedItems.length - 1 && !hasMore}
-              />
-            </RevealOnScroll>
+          {roadmapPhases.map((phase, index) => (
+            <RoadmapItem key={phase.phase} phase={phase} index={index} />
           ))}
-          
-          {hasMore && (
-            <div className="flex justify-center mt-6">
-              <button
-                onClick={() => setDisplayCount(roadmapItems.length)}
-                className="px-4 py-2 text-sm font-medium bg-primary/10 text-primary rounded-full hover:bg-primary/20 transition-colors"
-              >
-                Show More
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </section>

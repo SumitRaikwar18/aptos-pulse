@@ -16,9 +16,8 @@ const Index: React.FC = () => {
         e.preventDefault();
         const targetElement = document.querySelector(anchor.hash);
         if (targetElement) {
-          // Adjusted scroll position to account for smaller navbar
           window.scrollTo({
-            top: targetElement.getBoundingClientRect().top + window.scrollY - 60,
+            top: targetElement.getBoundingClientRect().top + window.scrollY - 80,
             behavior: 'smooth'
           });
           
@@ -37,11 +36,9 @@ const Index: React.FC = () => {
 
   return (
     <MainLayout>
-      <div className="flex flex-col space-y-0"> {/* Removed space between sections */}
-        <Hero />
-        <Features />
-        <Roadmap />
-      </div>
+      <Hero />
+      <Features />
+      <Roadmap />
     </MainLayout>
   );
 };
