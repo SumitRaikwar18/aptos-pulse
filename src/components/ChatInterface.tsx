@@ -1,6 +1,8 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Send } from 'lucide-react';
+import { sendMessageToAgent } from '@/utils/monadAgent';
+import { toast } from '@/hooks/use-toast';
 
 interface Message {
   role: 'user' | 'agent';
@@ -17,6 +19,7 @@ const ChatInterface: React.FC = () => {
       timestamp: new Date().toLocaleTimeString()
     }
   ]);
+  const [isLoading, setIsLoading] = useState(false);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -28,9 +31,9 @@ const ChatInterface: React.FC = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trim() || isLoading) return;
 
     // Add user message
     const userMessage: Message = {
@@ -39,40 +42,51 @@ const ChatInterface: React.FC = () => {
       timestamp: new Date().toLocaleTimeString()
     };
 
-    // Mock response based on input
-    let responseContent = '';
-    if (input.toLowerCase().includes('createtoken')) {
-      const parts = input.split(' ');
-      if (parts.length >= 4) {
-        const tokenName = parts[1];
-        const tokenSymbol = parts[2];
-        const tokenAmount = parts[3];
-        responseContent = `Successfully created ${tokenAmount} ${tokenName} (${tokenSymbol}) tokens! Transaction hash: 0x${Math.random().toString(16).substring(2, 42)}`;
-      } else {
-        responseContent = 'Invalid token creation format. Please use: createToken [name] [symbol] [amount]';
-      }
-    } else if (input.toLowerCase().includes('help')) {
-      responseContent = 'Available commands:\n- createToken [name] [symbol] [amount]\n- balance [address]\n- transfer [token] [recipient] [amount]';
-    } else {
-      responseContent = `I've processed your request: "${input}". Is there anything specific about Monad blockchain you'd like to know?`;
-    }
-
-    const agentMessage: Message = {
-      role: 'agent',
-      content: responseContent,
-      timestamp: new Date().toLocaleTimeString()
-    };
-
-    setMessages([...messages, userMessage, agentMessage]);
+    setMessages(prevMessages => [...prevMessages, userMessage]);
     setInput('');
+    setIsLoading(true);
+
+    try {
+      // Private key handling - in a real app, this should be done more securely
+      let privateKey: string | undefined;
+      if (input.toLowerCase().startsWith('setwallet') && input.split(' ').length > 1) {
+        privateKey = input.split(' ')[1];
+      }
+
+      // Send to backend
+      const response = await sendMessageToAgent(input, privateKey);
+      
+      const agentMessage: Message = {
+        role: 'agent',
+        content: response.response,
+        timestamp: new Date().toLocaleTimeString()
+      };
+
+      setMessages(prevMessages => [...prevMessages, agentMessage]);
+    } catch (error) {
+      console.error('Error from Monad agent:', error);
+      
+      // Add error message
+      const errorMessage: Message = {
+        role: 'agent',
+        content: 'Sorry, I encountered an error processing your request. Please try again later.',
+        timestamp: new Date().toLocaleTimeString()
+      };
+      
+      setMessages(prevMessages => [...prevMessages, errorMessage]);
+      
+      toast({
+        title: 'Communication Error',
+        description: 'Failed to reach the Monad agent server.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="flex flex-col h-full rounded-2xl overflow-hidden shadow-lg bg-white/5 backdrop-blur-sm border border-white/10">
-      <div className="p-3 border-b bg-muted/30">
-        <h2 className="font-medium text-center">Chat Assistant</h2>
-      </div>
-      
+    <div className="flex flex-col h-full">
       <div className="flex-1 overflow-y-auto p-3 md:p-4 space-y-3 md:space-y-4">
         {messages.map((message, index) => (
           <div 
@@ -106,11 +120,17 @@ const ChatInterface: React.FC = () => {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type a command or ask a question..."
             className="w-full px-3 py-2 md:px-4 md:py-3 rounded-full bg-background border focus:outline-none focus:ring-2 focus:ring-primary/50 pr-10 md:pr-12 text-sm md:text-base"
+            disabled={isLoading}
           />
           <button
             type="submit"
-            className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 md:p-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            className={`absolute right-2 top-1/2 -translate-y-1/2 p-1.5 md:p-2 rounded-full ${
+              isLoading 
+                ? 'bg-primary/70 cursor-not-allowed' 
+                : 'bg-primary hover:bg-primary/90'
+            } text-primary-foreground transition-colors`}
             aria-label="Send message"
+            disabled={isLoading}
           >
             <Send size={16} className="md:size-[18px]" />
           </button>

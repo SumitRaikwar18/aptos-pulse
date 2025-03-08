@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
           </div>
           
           <div className="mx-auto w-full max-w-4xl">
-            <div className="h-[70vh] max-h-[700px]">
+            <div className="h-[70vh] max-h-[700px] rounded-2xl overflow-hidden shadow-lg bg-white/5 backdrop-blur-sm border border-white/10">
               <ChatInterface />
             </div>
           </div>
