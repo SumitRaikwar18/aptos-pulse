@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Wallet } from 'lucide-react';
+import { Menu, X, Wallet, Home, BookOpen, LineChart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { usePrivy } from '@privy-io/react-auth';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -40,99 +40,61 @@ const Navbar: React.FC = () => {
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-elastic py-4 md:py-5 px-6 md:px-12",
-        isScrolled 
-          ? "backdrop-blur-xl bg-white/80 shadow-sm" 
-          : "bg-transparent"
+        "fixed bottom-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ease-elastic py-2 px-6 md:px-8",
+        "rounded-full mb-4 backdrop-blur-xl bg-white/80 shadow-lg border border-border/40",
+        "w-auto flex items-center justify-center"
       )}
     >
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div className="flex items-center gap-6 md:gap-10">
         <a 
           href="/"
-          className="text-xl font-semibold tracking-tight group"
+          className="p-2 text-foreground/80 hover:text-primary transition-colors flex flex-col items-center"
+          aria-label="Home"
         >
-          <span className="bg-clip-text transition-all duration-300 group-hover:text-transparent group-hover:bg-gradient-to-r from-primary to-primary/70">
-            Aelix
-          </span>
+          <Home size={20} />
+          <span className="text-xs mt-1">Home</span>
         </a>
         
-        {/* Desktop navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => (
-            <a 
-              key={item} 
-              href={`#${item.toLowerCase()}`}
-              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1.5px] after:w-0 after:bg-foreground after:transition-all hover:after:w-full"
-            >
-              {item}
-            </a>
-          ))}
-          
-          <button 
-            onClick={isDashboard ? () => logout() : handleConnectWallet}
-            className={cn(
-              "flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors",
-              isDashboard
-                ? "bg-destructive/10 text-destructive hover:bg-destructive/20"
-                : "bg-primary text-primary-foreground hover:bg-primary/90"
-            )}
-          >
-            <Wallet size={16} />
-            <span>{isDashboard ? "Disconnect" : (authenticated ? "Dashboard" : "Connect Wallet")}</span>
-          </button>
-        </nav>
+        <a 
+          href="#features"
+          className="p-2 text-foreground/80 hover:text-primary transition-colors flex flex-col items-center"
+          aria-label="Features"
+        >
+          <LineChart size={20} />
+          <span className="text-xs mt-1">Features</span>
+        </a>
         
-        {/* Mobile: Wallet connect button and menu button */}
-        <div className="md:hidden flex items-center gap-2">
-          <button 
-            onClick={isDashboard ? () => logout() : handleConnectWallet}
-            className={cn(
-              "flex items-center gap-1 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
-              isDashboard
-                ? "bg-destructive/10 text-destructive"
-                : "bg-primary text-primary-foreground"
-            )}
-          >
-            <Wallet size={14} />
-            <span className="sr-only md:not-sr-only">
-              {isDashboard ? "Disconnect" : (authenticated ? "Dashboard" : "Connect")}
-            </span>
-          </button>
-          
-          {navItems.length > 0 && (
-            <button 
-              className="text-foreground p-2"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          )}
-        </div>
-      </div>
-      
-      {/* Mobile menu */}
-      {navItems.length > 0 && (
-        <div 
+        <a 
+          href="#roadmap"
+          className="p-2 text-foreground/80 hover:text-primary transition-colors flex flex-col items-center"
+          aria-label="Roadmap"
+        >
+          <LineChart size={20} />
+          <span className="text-xs mt-1">Roadmap</span>
+        </a>
+        
+        <a 
+          href="/documentation"
+          className="p-2 text-foreground/80 hover:text-primary transition-colors flex flex-col items-center"
+          aria-label="Documentation"
+        >
+          <BookOpen size={20} />
+          <span className="text-xs mt-1">Docs</span>
+        </a>
+        
+        <button 
+          onClick={isDashboard ? () => logout() : handleConnectWallet}
           className={cn(
-            "fixed inset-0 top-[57px] z-40 bg-white/95 backdrop-blur-lg md:hidden transform transition-transform duration-300 ease-elastic",
-            mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+            "flex flex-col items-center p-2 transition-colors",
+            isDashboard
+              ? "text-destructive hover:text-destructive/80"
+              : "text-primary hover:text-primary/80"
           )}
         >
-          <nav className="flex flex-col items-center justify-center h-full gap-12 pb-20">
-            {navItems.map((item) => (
-              <a 
-                key={item} 
-                href={`#${item.toLowerCase()}`}
-                className="text-xl font-medium"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
-        </div>
-      )}
+          <Wallet size={20} />
+          <span className="text-xs mt-1">{isDashboard ? "Logout" : (authenticated ? "Dashboard" : "Connect")}</span>
+        </button>
+      </div>
     </header>
   );
 };

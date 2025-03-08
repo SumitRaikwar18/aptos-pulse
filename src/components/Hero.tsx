@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRightIcon, BookOpen } from 'lucide-react';
 import { AnimatedShinyText } from './ui/AnimatedShinyText';
+import { AnimatedGradientText } from './ui/AnimatedGradientText';
 import { usePrivy } from '@privy-io/react-auth';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -91,7 +92,9 @@ const Hero: React.FC = () => {
         >
           <span className="block font-medium text-base md:text-lg text-muted-foreground mb-4">Introducing</span>
           <AnimatedShinyText className="font-bold text-4xl md:text-5xl lg:text-6xl">
-            Empower Tomorrow: Your AI Ally on Monad Testnet
+            <AnimatedGradientText>
+              Empower Tomorrow: Your AI Ally on Monad Testnet
+            </AnimatedGradientText>
           </AnimatedShinyText>
         </h1>
         
@@ -127,13 +130,6 @@ const Hero: React.FC = () => {
               </span>
             </button>
           </div>
-          
-          <button 
-            onClick={() => setIsAboutOpen(true)}
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors underline"
-          >
-            Learn more
-          </button>
         </div>
       </div>
       
