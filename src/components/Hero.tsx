@@ -77,7 +77,7 @@ const Hero: React.FC = () => {
     <section 
       id="home" 
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center section-padding overflow-hidden"
+      className="relative pt-16 min-h-[90vh] flex items-center justify-center overflow-hidden"
     >
       {/* Background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">

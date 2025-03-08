@@ -17,7 +17,7 @@ const Index: React.FC = () => {
         const targetElement = document.querySelector(anchor.hash);
         if (targetElement) {
           window.scrollTo({
-            top: targetElement.getBoundingClientRect().top + window.scrollY - 80,
+            top: targetElement.getBoundingClientRect().top + window.scrollY - 70, // Reduced offset
             behavior: 'smooth'
           });
           
@@ -36,9 +36,11 @@ const Index: React.FC = () => {
 
   return (
     <MainLayout>
-      <Hero />
-      <Features />
-      <Roadmap />
+      <div className="flex flex-col space-y-0">
+        <Hero />
+        <Features />
+        <Roadmap />
+      </div>
     </MainLayout>
   );
 };

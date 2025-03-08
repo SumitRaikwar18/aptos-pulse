@@ -95,7 +95,7 @@ const Features: React.FC = () => {
     : features.filter(feature => feature.category === activeCategory);
 
   return (
-    <section id="features" className="section-padding bg-secondary/50">
+    <section id="features" className="py-16 md:py-20 px-6 md:px-12 lg:px-24 bg-secondary/50">
       <div className="max-w-7xl mx-auto">
         <RevealOnScroll>
           <div className="text-center mb-12">
