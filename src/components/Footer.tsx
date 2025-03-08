@@ -8,8 +8,8 @@ const Footer: React.FC = () => {
   return (
     <footer className="py-8 px-4 bg-background border-t border-border">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h3 className="text-xl font-semibold mb-2">Introducing Aelix | AI Agent On Monad</h3>
+        <div className="mb-8 text-center">
+          <h3 className="text-xl font-semibold mb-2">Aelix | AI Agent On Monad</h3>
           <p className="text-muted-foreground">
             Redefining experiences with precision and elegance.
           </p>
