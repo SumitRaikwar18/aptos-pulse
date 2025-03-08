@@ -15,7 +15,7 @@ const ChatInterface: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'agent',
-      content: 'Hi there! I\'m your AI assistant for Monad blockchain. You can ask me to create tokens, manage assets, or explain blockchain concepts. Try something like "createToken MyToken MTK 1000".',
+      content: "Hi, I'm Aelix, your AI agent on Monad Testnet blockchain. I can help you perform operations like creating tokens, managing wallets, and more. Try 'help' to see available commands or start by setting your wallet with 'setWallet <privateKey>'.",
       timestamp: new Date().toLocaleTimeString()
     }
   ]);

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,7 +12,6 @@ const Navbar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isDashboard = location.pathname === '/dashboard';
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,7 +62,7 @@ const Navbar: React.FC = () => {
           isScrolled ? "text-lg" : "text-xl"
         )}>Aelix</a>
         
-        <div className="flex items-center gap-3">
+        <div className="flex items-center">
           <button 
             onClick={isDashboard ? () => logout() : handleConnectWallet}
             className={cn(
@@ -77,47 +75,8 @@ const Navbar: React.FC = () => {
           >
             {isDashboard ? "Disconnect" : (authenticated ? "Dashboard" : "Connect Wallet")}
           </button>
-          
-          {!isDashboard && (
-            <button
-              className="md:hidden p-2 text-foreground/80 hover:text-primary transition-colors"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          )}
         </div>
       </div>
-      
-      {/* Mobile Menu - Only shown when toggled */}
-      {mobileMenuOpen && !isDashboard && (
-        <div className="md:hidden py-2 px-4 bg-background/95 border-b border-border/40 animate-fade-in">
-          <nav className="flex flex-col space-y-2">
-            <a 
-              href="/"
-              className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors flex items-center gap-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Home
-            </a>
-            <a 
-              href="#features"
-              className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors flex items-center gap-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Features
-            </a>
-            <a 
-              href="#roadmap"
-              className="px-4 py-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-muted transition-colors flex items-center gap-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Roadmap
-            </a>
-          </nav>
-        </div>
-      )}
     </header>
   );
 };
