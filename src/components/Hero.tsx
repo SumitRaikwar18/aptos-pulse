@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowRightIcon } from 'lucide-react';
+import { ArrowRightIcon, BookOpen } from 'lucide-react';
 import { AnimatedShinyText } from './ui/AnimatedShinyText';
 import { usePrivy } from '@privy-io/react-auth';
 import { useNavigate } from 'react-router-dom';
@@ -54,7 +54,7 @@ const Hero: React.FC = () => {
     };
   }, []);
   
-  const handleConnectWallet = async () => {
+  const handleGetStarted = async () => {
     if (authenticated) {
       navigate('/dashboard');
     } else {
@@ -106,15 +106,27 @@ const Hero: React.FC = () => {
           ref={buttonRef}
           className="opacity-0 flex flex-col items-center justify-center space-y-4"
         >
-          <button 
-            onClick={handleConnectWallet}
-            className="group relative overflow-hidden rounded-full bg-primary px-8 py-3 text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:px-10"
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              {authenticated ? "Go to Dashboard" : "Connect Wallet"}
-              <ArrowRightIcon className="transition-transform group-hover:translate-x-1" />
-            </span>
-          </button>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <button 
+              onClick={handleGetStarted}
+              className="group relative overflow-hidden rounded-full bg-primary px-8 py-3 text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:px-10"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Get Started
+                <ArrowRightIcon className="transition-transform group-hover:translate-x-1" />
+              </span>
+            </button>
+            
+            <button 
+              onClick={() => navigate('/documentation')}
+              className="group relative overflow-hidden rounded-full bg-secondary px-8 py-3 text-secondary-foreground transition-all duration-300 hover:bg-secondary/90"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Documentation
+                <BookOpen size={18} className="transition-transform group-hover:translate-x-1" />
+              </span>
+            </button>
+          </div>
           
           <button 
             onClick={() => setIsAboutOpen(true)}

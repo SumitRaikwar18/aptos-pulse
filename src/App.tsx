@@ -8,6 +8,7 @@ import { PrivyProvider } from '@privy-io/react-auth';
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
+import Documentation from "./pages/Documentation";
 
 // Update the query client with better defaults
 const queryClient = new QueryClient({
@@ -42,6 +43,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/documentation" element={<Documentation />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
