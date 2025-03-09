@@ -61,7 +61,7 @@ const ChatInterface: React.FC = () => {
       };
       setMessages(prevMessages => [...prevMessages, loadingMessage]);
 
-      // Send to backend
+      // Send to external API service
       const response = await sendMessageToAgent(input, privateKey);
       
       // Remove loading message and add actual response
@@ -80,21 +80,21 @@ const ChatInterface: React.FC = () => {
         variant: 'default',
       });
     } catch (error) {
-      console.error('Error from Monad agent:', error);
+      console.error('Error from Monad agent service:', error);
       
       // Remove loading message if it exists
       setMessages(prevMessages => {
         const filtered = prevMessages.filter(msg => msg.content !== 'Processing your request...');
         return [...filtered, {
           role: 'agent',
-          content: 'Sorry, I encountered an error processing your request. Please check your API_ENDPOINT environment variable (VITE_API_ENDPOINT) to ensure it points to your backend server.',
+          content: 'Sorry, I encountered an error processing your request. Please check that the VITE_API_ENDPOINT environment variable is set correctly to point to the Aelix agent service.',
           timestamp: new Date().toLocaleTimeString()
         }];
       });
       
       toast({
-        title: 'Communication Error',
-        description: 'Failed to reach the Monad agent server. Please check your VITE_API_ENDPOINT configuration.',
+        title: 'Connection Error',
+        description: 'Failed to reach the Aelix agent service. Please check your VITE_API_ENDPOINT configuration.',
         variant: 'destructive',
       });
     } finally {

@@ -1,27 +1,25 @@
 
 import axios from 'axios';
 
-// API endpoints - use environment variables with proper fallbacks
-const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT || 'https://your-backend-url.com'; // This should be your actual backend URL, not localhost
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY || '';
-const COINGECKO_API_KEY = import.meta.env.VITE_COINGECKO_API_KEY || '';
-const MONAD_RPC_URL = import.meta.env.VITE_MONAD_RPC_URL || 'https://testnet-rpc.monad.xyz';
-
 export interface MonadAgentResponse {
   response: string;
 }
 
 /**
  * Send a message to the Monad agent
+ * Note: This frontend-only version will connect to an external API endpoint
  */
 export const sendMessageToAgent = async (
   input: string, 
   privateKey?: string
 ): Promise<MonadAgentResponse> => {
   try {
-    console.log('Sending request to:', API_ENDPOINT);
+    // Get API endpoint from environment or use default external API
+    const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT || 'https://api.monad-agent.com';
     
-    // Set up request configuration with proper CORS headers
+    console.log('Connecting to external Aelix agent service:', API_ENDPOINT);
+    
+    // Set up request configuration
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -29,49 +27,28 @@ export const sendMessageToAgent = async (
       }
     };
     
-    // Prepare request payload
+    // Prepare request payload (only send what's needed for frontend)
     const payload = {
       input,
-      privateKey,
-      openaiApiKey: OPENAI_API_KEY,
-      coingeckoApiKey: COINGECKO_API_KEY,
-      monadRpcUrl: MONAD_RPC_URL
+      privateKey: privateKey || undefined
     };
     
-    console.log('Request payload (without sensitive data):', {
-      input,
-      hasPrivateKey: !!privateKey,
-      hasOpenAiKey: !!OPENAI_API_KEY,
-      hasCoingeckoKey: !!COINGECKO_API_KEY,
-      monadRpcUrl: MONAD_RPC_URL
-    });
-    
-    // Send the request
+    // Send the request to external API
     const response = await axios.post(`${API_ENDPOINT}/agent`, payload, config);
-    
-    console.log('Response received:', {
-      status: response.status,
-      hasData: !!response.data
-    });
     
     return response.data;
   } catch (error) {
-    // Enhanced error logging
+    // Error logging
     if (axios.isAxiosError(error)) {
-      console.error('Axios error details:', {
+      console.error('API connection error:', {
         message: error.message,
         status: error.response?.status,
-        data: error.response?.data,
-        config: {
-          url: error.config?.url,
-          method: error.config?.method,
-          headers: error.config?.headers
-        }
+        data: error.response?.data
       });
     } else {
       console.error('Error sending message to Monad agent:', error);
     }
     
-    throw new Error('Failed to communicate with the Monad agent. Please check the server connection.');
+    throw new Error('Failed to connect to the Aelix agent service. Please check your network connection and try again.');
   }
 };

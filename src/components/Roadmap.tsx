@@ -2,6 +2,7 @@
 import React from 'react';
 import RevealOnScroll from './ui/RevealOnScroll';
 import { CheckIcon, Clock, Calendar, Globe } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 interface RoadmapPhase {
   status: 'completed' | 'in-progress' | 'upcoming' | 'future';
@@ -12,15 +13,17 @@ interface RoadmapPhase {
     text: string;
     completed: boolean;
   }>;
-  icon: React.ComponentType<{ size?: number }>;
+  icon: LucideIcon;
 }
 
 const RoadmapItem: React.FC<{ phase: RoadmapPhase; index: number }> = ({ phase, index }) => {
+  const Icon = phase.icon;
+  
   return (
     <RevealOnScroll delay={index * 100}>
       <div className="relative pl-8 pb-12 border-l border-primary/20 last:border-0 ml-4">
         <div className="absolute left-0 top-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center transform -translate-x-1/2">
-          <phase.icon size={16} className="text-primary" />
+          <Icon size={16} className="text-primary" />
         </div>
         <div className="flex flex-wrap items-center gap-2 mb-3">
           <span className={cn(
@@ -130,17 +133,19 @@ const Roadmap: React.FC = () => {
   ];
 
   return (
-    <section id="roadmap" className="py-16 md:py-24 bg-background">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-16">
-          <span className="inline-block px-3 py-1 text-xs font-medium text-primary bg-primary/10 rounded-full mb-4">
-            Roadmap
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">🚀 Our Journey Forward</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            The evolution of Aelix on the Monad blockchain, from concept to ecosystem.
-          </p>
-        </div>
+    <section id="roadmap" className="section-padding">
+      <div className="max-w-7xl mx-auto">
+        <RevealOnScroll>
+          <div className="text-center mb-16">
+            <span className="inline-block px-3 py-1 text-xs font-medium text-primary bg-primary/10 rounded-full mb-4">
+              Roadmap
+            </span>
+            <h2 className="text-balance mb-4">🚀 Our Journey Forward</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              The evolution of Aelix on the Monad blockchain, from concept to ecosystem.
+            </p>
+          </div>
+        </RevealOnScroll>
 
         <div className="max-w-3xl mx-auto">
           {roadmapPhases.map((phase, index) => (
