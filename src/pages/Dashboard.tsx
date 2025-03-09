@@ -1,10 +1,10 @@
-
-import React from 'react';
-import MainLayout from '../layouts/MainLayout';
-import ChatInterface from '../components/ChatInterface';
-import { usePrivy } from '@privy-io/react-auth';
-import { toast } from '@/hooks/use-toast';
-import { useNavigate } from 'react-router-dom';
+// frontend/src/pages/Dashboard.tsx
+import React from "react";
+import MainLayout from "../layouts/MainLayout";
+import ChatInterface from "../components/ChatInterface";
+import { usePrivy } from "@privy-io/react-auth";
+import { toast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard: React.FC = () => {
   const { authenticated, logout } = usePrivy();
@@ -12,11 +12,11 @@ const Dashboard: React.FC = () => {
 
   React.useEffect(() => {
     if (!authenticated) {
-      navigate('/');
+      navigate("/");
       toast({
         title: "Authentication required",
         description: "Please connect your wallet to access the dashboard.",
-        variant: "destructive"
+        variant: "destructive",
       });
     }
   }, [authenticated, navigate]);
@@ -35,7 +35,6 @@ const Dashboard: React.FC = () => {
               Your AI assistant for Monad blockchain operations
             </p>
           </div>
-          
           <div className="mx-auto w-full max-w-4xl">
             <div className="h-[70vh] max-h-[700px] rounded-2xl overflow-hidden shadow-lg bg-white/5 backdrop-blur-sm border border-white/10">
               <ChatInterface />
