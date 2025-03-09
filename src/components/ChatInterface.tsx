@@ -47,37 +47,54 @@ const ChatInterface: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // Private key handling - in a real app, this should be done more securely
+      // Extract private key if using setWallet command
       let privateKey: string | undefined;
       if (input.toLowerCase().startsWith('setwallet') && input.split(' ').length > 1) {
         privateKey = input.split(' ')[1];
       }
 
+      // Add loading message
+      const loadingMessage: Message = {
+        role: 'agent',
+        content: 'Processing your request...',
+        timestamp: new Date().toLocaleTimeString()
+      };
+      setMessages(prevMessages => [...prevMessages, loadingMessage]);
+
       // Send to backend
       const response = await sendMessageToAgent(input, privateKey);
       
-      const agentMessage: Message = {
-        role: 'agent',
-        content: response.response,
-        timestamp: new Date().toLocaleTimeString()
-      };
-
-      setMessages(prevMessages => [...prevMessages, agentMessage]);
+      // Remove loading message and add actual response
+      setMessages(prevMessages => {
+        const filtered = prevMessages.filter(msg => msg.content !== 'Processing your request...');
+        return [...filtered, {
+          role: 'agent',
+          content: response.response,
+          timestamp: new Date().toLocaleTimeString()
+        }];
+      });
+      
+      toast({
+        title: 'Request Processed',
+        description: 'Your request to Aelix agent was successful.',
+        variant: 'default',
+      });
     } catch (error) {
       console.error('Error from Monad agent:', error);
       
-      // Add error message
-      const errorMessage: Message = {
-        role: 'agent',
-        content: 'Sorry, I encountered an error processing your request. Please try again later.',
-        timestamp: new Date().toLocaleTimeString()
-      };
-      
-      setMessages(prevMessages => [...prevMessages, errorMessage]);
+      // Remove loading message if it exists
+      setMessages(prevMessages => {
+        const filtered = prevMessages.filter(msg => msg.content !== 'Processing your request...');
+        return [...filtered, {
+          role: 'agent',
+          content: 'Sorry, I encountered an error processing your request. Please make sure the backend server is running and accessible.',
+          timestamp: new Date().toLocaleTimeString()
+        }];
+      });
       
       toast({
         title: 'Communication Error',
-        description: 'Failed to reach the Monad agent server.',
+        description: 'Failed to reach the Monad agent server. Please check your connection.',
         variant: 'destructive',
       });
     } finally {
