@@ -3,8 +3,8 @@ import axios from 'axios';
 
 // API endpoints - use environment variables with proper fallbacks
 const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT || 'https://your-backend-url.com'; // This should be your actual backend URL, not localhost
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY || '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';
-const COINGECKO_API_KEY = import.meta.env.VITE_COINGECKO_API_KEY || 'CG-q4ze7yRFSDz6aCKnP18MZ19w';
+const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY || '';
+const COINGECKO_API_KEY = import.meta.env.VITE_COINGECKO_API_KEY || '';
 const MONAD_RPC_URL = import.meta.env.VITE_MONAD_RPC_URL || 'https://testnet-rpc.monad.xyz';
 
 export interface MonadAgentResponse {

@@ -87,14 +87,14 @@ const ChatInterface: React.FC = () => {
         const filtered = prevMessages.filter(msg => msg.content !== 'Processing your request...');
         return [...filtered, {
           role: 'agent',
-          content: 'Sorry, I encountered an error processing your request. Please make sure the backend server is running and accessible.',
+          content: 'Sorry, I encountered an error processing your request. Please check your API_ENDPOINT environment variable (VITE_API_ENDPOINT) to ensure it points to your backend server.',
           timestamp: new Date().toLocaleTimeString()
         }];
       });
       
       toast({
         title: 'Communication Error',
-        description: 'Failed to reach the Monad agent server. Please check your connection.',
+        description: 'Failed to reach the Monad agent server. Please check your VITE_API_ENDPOINT configuration.',
         variant: 'destructive',
       });
     } finally {
