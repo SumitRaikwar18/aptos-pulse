@@ -77,7 +77,7 @@ const Hero: React.FC = () => {
     <section 
       id="home" 
       ref={heroRef}
-      className="relative pt-16 min-h-[90vh] flex items-center justify-center overflow-hidden"
+      className="relative pt-4 min-h-[90vh] flex items-center justify-center overflow-hidden"
     >
       {/* Background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -85,13 +85,13 @@ const Hero: React.FC = () => {
         <div className="absolute bottom-[10%] left-[30%] w-[300px] h-[300px] rounded-full bg-blue-300/10 filter blur-[60px] animate-float" style={{ animationDelay: '1s' }}></div>
       </div>
       
-      <div className="max-w-4xl mx-auto text-center px-6">
+      <div className="max-w-4xl mx-auto text-center px-4 sm:px-6">
         <h1 
           ref={titleRef}
           className="text-balance opacity-0 mb-6"
         >
-          <span className="block font-medium text-base md:text-lg text-muted-foreground mb-4">Introducing Aelix | AI Agent On Monad</span>
-          <AnimatedShinyText className="font-bold text-4xl md:text-5xl lg:text-6xl">
+          <span className="block font-medium text-base md:text-lg text-muted-foreground mb-2 sm:mb-4">Introducing Aelix | AI Agent On Monad</span>
+          <AnimatedShinyText className="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
             <AnimatedGradientText>
               Empower Tomorrow: Your AI Ally on Monad Testnet
             </AnimatedGradientText>
@@ -100,7 +100,7 @@ const Hero: React.FC = () => {
         
         <p 
           ref={subtitleRef}
-          className="text-balance opacity-0 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12"
+          className="text-balance opacity-0 text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-12"
         >
           Aelix combines advanced AI capabilities with the power of Monad blockchain to create a seamless, intuitive experience for managing digital assets.
         </p>
@@ -112,21 +112,21 @@ const Hero: React.FC = () => {
           <div className="flex flex-wrap gap-4 justify-center">
             <button 
               onClick={handleGetStarted}
-              className="group relative overflow-hidden rounded-full bg-primary px-8 py-3 text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:px-10"
+              className="group relative overflow-hidden rounded-full bg-primary px-6 sm:px-8 py-2.5 sm:py-3 text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:px-10"
             >
-              <span className="relative z-10 flex items-center gap-2">
+              <span className="relative z-10 flex items-center gap-2 text-sm sm:text-base">
                 Get Started
-                <ArrowRightIcon className="transition-transform group-hover:translate-x-1" />
+                <ArrowRightIcon className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
               </span>
             </button>
             
             <button 
               onClick={() => navigate('/documentation')}
-              className="group relative overflow-hidden rounded-full bg-secondary px-8 py-3 text-secondary-foreground transition-all duration-300 hover:bg-secondary/90"
+              className="group relative overflow-hidden rounded-full bg-secondary px-6 sm:px-8 py-2.5 sm:py-3 text-secondary-foreground transition-all duration-300 hover:bg-secondary/90"
             >
-              <span className="relative z-10 flex items-center gap-2">
+              <span className="relative z-10 flex items-center gap-2 text-sm sm:text-base">
                 Documentation
-                <BookOpen size={18} className="transition-transform group-hover:translate-x-1" />
+                <BookOpen size={16} className="sm:size-18 transition-transform group-hover:translate-x-1" />
               </span>
             </button>
           </div>
