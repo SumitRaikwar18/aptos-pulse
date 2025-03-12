@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Instagram, Twitter, Linkedin, Github } from 'lucide-react';
+import Logo from './Logo';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -9,7 +10,9 @@ const Footer: React.FC = () => {
     <footer className="py-8 px-4 bg-background border-t border-border">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 text-center">
-          <h3 className="text-xl font-semibold mb-2">Aelix | AI Agent On Monad</h3>
+          <div className="flex justify-center mb-4">
+            <Logo className="h-8" />
+          </div>
           <p className="text-muted-foreground">
             Redefining experiences with precision and elegance.
           </p>

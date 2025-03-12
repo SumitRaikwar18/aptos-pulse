@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import Logo from './Logo';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -57,10 +58,9 @@ const Navbar: React.FC = () => {
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <a href="/" className={cn(
-          "font-bold transition-all duration-300",
-          isScrolled ? "text-lg" : "text-xl"
-        )}>Aelix</a>
+        <a href="/" className="transition-all duration-300">
+          <Logo />
+        </a>
         
         <div className="flex items-center">
           <button 
