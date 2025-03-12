@@ -10,24 +10,40 @@ import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
 import Documentation from "./pages/Documentation";
 
-// Update the query client with better defaults
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
-      staleTime: 5 * 60 * 1000, // 5 minutes
+      staleTime: 5 * 60 * 1000,
     },
   },
 });
 
 const App = () => {
-  // Handle successful login with redirection
   const handleLogin = (user: any) => {
-    // Redirect to dashboard after successful login
     window.location.href = '/dashboard';
   };
 
-  const privyAppId = import.meta.env.VITE_PRIVY_APP_ID || "";
+  const privyAppId = import.meta.env.VITE_PRIVY_APP_ID;
+
+  // Render app without Privy if no app ID is available
+  if (!privyAppId) {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/documentation" element={<Documentation />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    );
+  }
 
   return (
     <PrivyProvider
@@ -36,7 +52,7 @@ const App = () => {
         appearance: {
           theme: 'light',
           accentColor: '#000000',
-          logo: 'https://your-logo-url.com/logo.png', // Replace with your logo URL
+          logo: 'https://your-logo-url.com/logo.png',
         },
         loginMethods: ['wallet'],
         embeddedWallets: {
@@ -54,7 +70,6 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/documentation" element={<Documentation />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
