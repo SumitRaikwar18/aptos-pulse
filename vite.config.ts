@@ -1,37 +1,22 @@
-// // vite.config.ts
-// import { defineConfig } from "vite";
-// import react from "@vitejs/plugin-react";
-
-// export default defineConfig({
-//   plugins: [react()],
-//   server: {
-//     port: 8080, // Explains why it’s on 8080
-//   },
-// });
-
-// vite.config.ts
-// vite.config.ts
-// vite.config.ts
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { componentTagger } from "lovable-tagger";
 
-export default defineConfig({
-  plugins: [react()],
+// https://vitejs.dev/config/
+export default defineConfig(({ mode }) => ({
   server: {
+    host: "::",
     port: 8080,
-    proxy: {
-      "/agent": {
-        target: "https://opulent-tribble-vw7qxp454q73xwrq-3000.app.github.dev",
-        changeOrigin: true,
-        secure: true,
-        rewrite: (path) => path.replace(/^\/agent/, "/agent"),
-      },
-    },
   },
+  plugins: [
+    react(),
+    mode === 'development' &&
+    componentTagger(),
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-});
+}));
