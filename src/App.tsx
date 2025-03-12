@@ -27,9 +27,11 @@ const App = () => {
     window.location.href = '/dashboard';
   };
 
+  const privyAppId = import.meta.env.VITE_PRIVY_APP_ID || "";
+
   return (
     <PrivyProvider
-      appId="cm7zzyclp00nc5x4sd4it9wcf"
+      appId={privyAppId}
       config={{
         appearance: {
           theme: 'light',
