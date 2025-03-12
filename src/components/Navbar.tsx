@@ -50,10 +50,8 @@ const Navbar: React.FC = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-elastic",
         isScrolled 
-          ? scrollDirection === 'down' 
-            ? "py-1.5 bg-background/95 backdrop-blur-lg shadow-sm" 
-            : "py-2 bg-background/90 backdrop-blur-md"
-          : "py-3 bg-background/80 backdrop-blur-sm",
+          ? "py-1.5 bg-background/95 backdrop-blur-lg shadow-sm" 
+          : "py-2 bg-background/90 backdrop-blur-md",
         "border-b border-border/40"
       )}
     >

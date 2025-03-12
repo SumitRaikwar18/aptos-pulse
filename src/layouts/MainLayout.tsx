@@ -15,7 +15,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className={`flex-1 ${isDashboard ? 'pt-14' : ''}`}>{children}</main>
+      <main className={`flex-1 ${isDashboard ? 'pt-14' : 'pt-24 md:pt-28'}`}>{children}</main>
       <Footer />
     </div>
   );
