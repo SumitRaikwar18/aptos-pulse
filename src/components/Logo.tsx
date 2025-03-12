@@ -12,7 +12,7 @@ const Logo: React.FC<LogoProps> = ({ className }) => {
       <img 
         src="/lovable-uploads/83658abf-c342-42b2-9279-82b780dec951.png" 
         alt="Aelix Logo" 
-        className="h-8"
+        className="h-12 w-auto" 
       />
     </div>
   );

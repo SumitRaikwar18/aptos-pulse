@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 text-center">
           <div className="flex justify-center mb-4">
-            <Logo className="h-8" />
+            <Logo className="h-12" />
           </div>
           <p className="text-muted-foreground">
             Redefining experiences with precision and elegance.
