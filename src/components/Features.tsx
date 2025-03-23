@@ -96,7 +96,7 @@ const Features: React.FC = () => {
     : features.filter(feature => feature.category === activeCategory);
 
   return (
-    <section id="features" className="py-16 md:py-20 px-6 md:px-12 lg:px-24 bg-secondary/50">
+    <section id="features" className="py-16 md:py-20 px-6 md:px-12 lg:px-24 bg-accent/50">
       <div className="max-w-7xl mx-auto">
         <RevealOnScroll>
           <div className="text-center mb-12">
@@ -110,7 +110,7 @@ const Features: React.FC = () => {
 
         <RevealOnScroll delay={100}>
           <div className="mb-10 flex justify-center">
-            <div className="flex flex-wrap gap-2 bg-background/50 backdrop-blur-sm p-1 rounded-full border border-border/40">
+            <div className="flex flex-wrap gap-2 bg-background/80 backdrop-blur-sm p-1 rounded-full border border-border/40">
               {categories.map((category) => (
                 <button
                   key={category.id}

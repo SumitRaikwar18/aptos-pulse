@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-8 px-4 bg-background border-t border-border">
+    <footer className="py-8 px-4 bg-accent/30 border-t border-border">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 text-center">
           <div className="flex justify-center mb-4">
@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
               <a 
                 key={i}
                 href={item.href}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors"
                 aria-label={`Social media link ${i + 1}`}
               >
                 {item.icon}
