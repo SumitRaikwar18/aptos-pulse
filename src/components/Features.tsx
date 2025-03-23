@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { 
   Wallet, 
   Coins, 
-  CreditCard, 
+  Bell, 
   Send, 
-  Droplets, 
-  Gauge, 
-  TrendingUp, 
+  Clock, 
+  Users, 
+  BarChart, 
   DollarSign, 
-  ClipboardList, 
-  Terminal 
+  ClipboardCheck, 
+  HelpCircle 
 } from 'lucide-react';
 import RevealOnScroll from './ui/RevealOnScroll';
 import FeatureCard from './FeatureCard';
@@ -21,63 +21,63 @@ const Features: React.FC = () => {
   
   const features = [
     {
+      icon: Bell,
+      title: "Real-Time Account Monitoring",
+      description: "Instant alerts for low balances, keeping your agents aware at all times.",
+      category: "monitoring"
+    },
+    {
+      icon: Send,
+      title: "Smart Token Transfers",
+      description: "Send tokens now or schedule for later with automatic Explorer links.",
+      category: "transactions"
+    },
+    {
+      icon: Users,
+      title: "Batch Transaction Power",
+      description: "Multi-recipient transfers made simple with sequential execution.",
+      category: "transactions"
+    },
+    {
+      icon: BarChart,
+      title: "Network Insights",
+      description: "Live Aptos blockchain stats for smarter agent decision-making.",
+      category: "data"
+    },
+    {
+      icon: DollarSign,
+      title: "Market-Aware Operations",
+      description: "Free token price feeds from CoinGecko for market-responsive actions.",
+      category: "data"
+    },
+    {
       icon: Wallet,
       title: "Wallet Management",
-      description: "Securely set up and manage your Monad Testnet wallet with a single command.",
+      description: "Easy wallet setup in one command to enable blockchain interactions.",
       category: "wallet"
     },
     {
       icon: Coins,
-      title: "Token Creation",
-      description: "Effortlessly deploy custom ERC-20 tokens on Monad Testnet.",
-      category: "tokens"
-    },
-    {
-      icon: CreditCard,
-      title: "Balance Tracking",
-      description: "Instantly check your MONAD balance with real-time updates.",
+      title: "Balance Check",
+      description: "Instant APT balance updates to keep your agents informed.",
       category: "wallet"
     },
     {
-      icon: Send,
-      title: "Transaction Power",
-      description: "Send MONAD tokens or sign messages with seamless blockchain integration.",
+      icon: Clock,
+      title: "Scheduled Transfers",
+      description: "Set up time-based token transfers with automatic execution.",
       category: "transactions"
     },
     {
-      icon: Droplets,
-      title: "Faucet Guidance",
-      description: "Get clear instructions on claiming testnet MON tokens from the Monad faucet.",
-      category: "resources"
-    },
-    {
-      icon: Gauge,
-      title: "Gas Insights",
-      description: "Monitor gas prices to optimize transactions efficiently.",
+      icon: ClipboardCheck,
+      title: "Transaction Tracking",
+      description: "View transaction status with direct links to Aptos Explorer.",
       category: "transactions"
     },
     {
-      icon: TrendingUp,
-      title: "Token Trends",
-      description: "Discover trending tokens on Monad Testnet with live explorer data.",
-      category: "tokens"
-    },
-    {
-      icon: DollarSign,
-      title: "Price Checker",
-      description: "Fetch real-time token prices from CoinGecko for informed decisions.",
-      category: "tokens"
-    },
-    {
-      icon: ClipboardList,
-      title: "History Explorer",
-      description: "Review recent transactions with detailed explorer links.",
-      category: "transactions"
-    },
-    {
-      icon: Terminal,
-      title: "User-Friendly Commands",
-      description: "Interact with Aelix using simple, natural commands for a seamless experience.",
+      icon: HelpCircle,
+      title: "Command Hub",
+      description: "Full control with a simple help menu for all available commands.",
       category: "resources"
     }
   ];
@@ -85,8 +85,9 @@ const Features: React.FC = () => {
   const categories = [
     { id: 'all', label: 'All Features' },
     { id: 'wallet', label: 'Wallet' },
-    { id: 'tokens', label: 'Tokens' },
     { id: 'transactions', label: 'Transactions' },
+    { id: 'monitoring', label: 'Monitoring' },
+    { id: 'data', label: 'Data & Insights' },
     { id: 'resources', label: 'Resources' }
   ];
 
@@ -102,7 +103,7 @@ const Features: React.FC = () => {
             <span className="inline-block px-3 py-1 text-xs font-medium text-primary bg-primary/10 rounded-full mb-4">Features</span>
             <h2 className="text-balance mb-4">Blockchain Simplified with AI</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Experience the future of blockchain interaction through our advanced AI agent built specifically for Monad.
+              Experience the future of blockchain interaction through our advanced AI agent built specifically for Aptos.
             </p>
           </div>
         </RevealOnScroll>

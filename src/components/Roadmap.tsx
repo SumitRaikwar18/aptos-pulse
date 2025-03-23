@@ -81,53 +81,44 @@ const Roadmap: React.FC = () => {
     {
       status: 'completed',
       phase: "Phase 1",
-      title: "Testnet Launch & Core Features",
-      description: "Aelix successfully launched on Monad Testnet (Chain ID: 10143) with core AI functionality.",
+      title: "Foundation (Completed)",
+      description: "Core autonomous agent infrastructure for Aptos, ready for production use.",
       icon: CheckIcon,
       items: [
-        { text: "Wallet & Transactions: setWallet, getWalletAddress, getBalance, transferTokens, signMessage, getTransactionHistory", completed: true },
-        { text: "Gas & Token Tools: getGasPrice, getTokenPrice, getTrendingTokens, createToken, getFaucetTokens", completed: true },
-        { text: "Faucet Integration: Testnet MON tokens claimable via testnet.monad.xyz", completed: true },
-        { text: "Public Beta Testing: Core AI tools fully functional & tested", completed: true }
+        { text: "Built core agent with wallet setup (set-wallet) and balance check (balance)", completed: true },
+        { text: "Added real-time monitoring (monitor-account) with balance alerts", completed: true },
+        { text: "Implemented instant (transfer) and scheduled (schedule-tx) token transfers with Explorer URLs", completed: true },
+        { text: "Enabled batch transfers (batch-transfer) for multiple recipients", completed: true },
+        { text: "Integrated network stats (network-stats) and price feeds (price-feed)", completed: true },
+        { text: "Set up Express server for command access (help included)", completed: true }
       ]
     },
     {
       status: 'in-progress',
       phase: "Phase 2",
-      title: "Yield Optimization & Advanced AI Capabilities",
-      description: "Expanding Aelix's AI functionalities to include staking, governance, and yield optimization.",
+      title: "Enhancement & Intelligence",
+      description: "Adding intelligent decision-making and broader ecosystem integration to elevate AptosPulse's capabilities.",
       icon: Clock,
       items: [
-        { text: "AI-Driven Governance: Deploy createGovernance for community-based decision-making", completed: false },
-        { text: "AI Proposal Engine: Suggest governance proposals based on user activity & transaction trends", completed: false },
-        { text: "Staking & Rewards: Implement stakeTokens for MON and Aelix-created ERC-20 tokens", completed: false },
-        { text: "Smart Yield Optimization: AI-powered staking strategies based on real-time gas fees & market conditions", completed: false },
-        { text: "Token Price Fetching: Integrated CoinGecko for real-time MONAD price updates", completed: true },
-        { text: "Multi-Token Support: Extend transferTokens & getBalance to support custom Aelix ERC-20 tokens", completed: false },
-        { text: "AI-Powered Market Insights: Predict token trends & portfolio optimization strategies", completed: false }
+        { text: "Upgrade monitoring with configurable intervals and Discord alerts", completed: false },
+        { text: "Optimize transfer gas fees using network stats", completed: false },
+        { text: "Add price-triggered transfers (e.g., 'send when APT > $10')", completed: false },
+        { text: "Introduce transaction history lookup (history)", completed: false },
+        { text: "Implement auto-top-up from Testnet faucet (auto-top-up)", completed: false }
       ]
     },
     {
       status: 'upcoming',
       phase: "Phase 3",
-      title: "Mainnet Integration",
-      description: "Full integration with Monad mainnet, offering production-ready AI tools for blockchain operations.",
+      title: "Scalability & Ecosystem Impact",
+      description: "Scaling AptosPulse into a robust, multi-agent framework with ecosystem-wide benefits for Aptos.",
       icon: Calendar,
       items: [
-        { text: "Risk Model v1: AI-driven risk assessment for transactions (gas fees vs. token value)", completed: false },
-        { text: "Mainnet Migration: Upgrade all AI tools for production-ready blockchain operations", completed: false }
-      ]
-    },
-    {
-      status: 'future',
-      phase: "Phase 4",
-      title: "Ecosystem Expansion",
-      description: "Partnerships with key DeFi protocols and development of custom AI agents tailored to Monad.",
-      icon: Globe,
-      items: [
-        { text: "Advanced Yield Optimization: AI-automated yield farming & staking maximization", completed: false },
-        { text: "Ecosystem Partnerships: Integrate Aelix with Monad-native DeFi platforms (DEXes, lending protocols)", completed: false },
-        { text: "Custom AI Agents: Specialized AI-driven bots for trading, lending, and governance", completed: false }
+        { text: "Enable true batch transfers via Move script for gas efficiency", completed: false },
+        { text: "Integrate cross-chain bridging (e.g., Stargate Testnet)", completed: false },
+        { text: "Build a real-time agent dashboard (HTML frontend)", completed: false },
+        { text: "Add blockchain event listener (events) for live updates", completed: false },
+        { text: "Create agent collaboration hub (collaborate) for multi-instance coordination", completed: false }
       ]
     }
   ];
@@ -142,7 +133,7 @@ const Roadmap: React.FC = () => {
             </span>
             <h2 className="text-balance mb-4">🚀 Our Journey Forward</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              The evolution of Aelix on the Monad blockchain, from concept to ecosystem.
+              The evolution of AptosPulse on the Aptos blockchain, from concept to ecosystem.
             </p>
           </div>
         </RevealOnScroll>
