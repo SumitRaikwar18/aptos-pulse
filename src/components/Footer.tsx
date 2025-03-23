@@ -14,13 +14,13 @@ const Footer: React.FC = () => {
             <Logo className="h-16" />
           </div>
           <p className="text-muted-foreground">
-            Redefining experiences with precision and elegance.
+            Empower the Future: Autonomous Agents for the Aptos Ecosystem
           </p>
         </div>
         
         <div className="flex flex-col md:flex-row justify-between items-center pt-4 border-t border-border">
           <p className="text-sm text-muted-foreground mb-4 md:mb-0">
-            © {currentYear} Aelix. All rights reserved.
+            © {currentYear} AptosPulse. All rights reserved.
           </p>
           
           <div className="flex items-center gap-4">

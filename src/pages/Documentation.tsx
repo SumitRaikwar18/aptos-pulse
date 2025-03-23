@@ -12,12 +12,12 @@ const Documentation: React.FC = () => {
       title: 'Getting Started',
       content: [
         {
-          subtitle: 'What is Aelix?',
-          text: 'Aelix is an advanced AI agent built specifically for the Monad blockchain. By leveraging cutting-edge artificial intelligence, Aelix enables users to interact with blockchain technology through natural language, making complex operations like token creation, asset management, and transaction analysis accessible to everyone.'
+          subtitle: 'What is AptosPulse?',
+          text: 'AptosPulse is an advanced autonomous agent framework built specifically for the Aptos blockchain. By leveraging cutting-edge artificial intelligence, AptosPulse enables users to interact with blockchain technology through natural language, making complex operations like token transfers, account monitoring, and transaction scheduling accessible to everyone.'
         },
         {
           subtitle: 'Connecting Your Wallet',
-          text: 'To start using Aelix, click the "Get Started" button on the homepage. You\'ll be prompted to connect your wallet using Privy. Once connected, you\'ll be redirected to the dashboard where you can start interacting with the AI agent.'
+          text: 'To start using AptosPulse, click the "Get Started" button on the homepage. You\'ll be prompted to connect your wallet using Privy. Once connected, you\'ll be redirected to the dashboard where you can start interacting with the AI agent.'
         }
       ]
     },
@@ -27,33 +27,33 @@ const Documentation: React.FC = () => {
       content: [
         {
           subtitle: 'Wallet Management',
-          text: 'Check your wallet balance with "balance" or "check balance". View your wallet address with "my address" or "show address".'
+          text: 'Initialize your Aptos account with "set-wallet" to enable blockchain interactions. Monitor your wallet balance with "monitor-account" to get automatic alerts when funds drop below threshold.'
         },
         {
-          subtitle: 'Token Creation',
-          text: 'Create a new token with "create token [NAME] [SYMBOL] [SUPPLY]". For example: "create token MyToken MTK 1000000".'
+          subtitle: 'Token Transfers',
+          text: 'Send tokens with "transfer" for instant sends with Explorer URLs. Use "schedule-tx" for timestamp-based transfers, and "batch-transfer" to send tokens to multiple recipients sequentially.'
         },
         {
-          subtitle: 'Transactions',
-          text: 'Send tokens with "send [AMOUNT] [TOKEN] to [ADDRESS]". For example: "send 10 MONAD to 0x123...". Check transaction status with "status [TX_HASH]".'
+          subtitle: 'Network Insights',
+          text: 'Get live blockchain data with "network-stats" to fetch block height, chain ID, and epoch. Check token prices with "price-feed" which uses CoinGecko\'s API for real-time market data.'
         }
       ]
     },
     {
-      id: 'advanced',
-      title: 'Advanced Features',
+      id: 'roadmap',
+      title: 'Project Roadmap',
       content: [
         {
-          subtitle: 'Token Analytics',
-          text: 'Get token price information with "price [TOKEN]". View trending tokens with "trending tokens" or "popular tokens".'
+          subtitle: 'Phase 1: Foundation (Completed)',
+          text: 'Core autonomous agent infrastructure is built and ready with wallet integration, account monitoring, smart token transfers, batch transactions, network insights, market-aware operations, and API server setup.'
         },
         {
-          subtitle: 'Gas Optimization',
-          text: 'Check current gas prices with "gas price" or "gas fees". Optimize your transaction with "optimize transaction" or "suggest gas".'
+          subtitle: 'Phase 2: Enhancement & Intelligence',
+          text: 'Expanding capabilities with improved monitoring with notifications, gas optimization for transfers, price-triggered transfers, transaction history tracking, and auto-top-up for testnet wallets.'
         },
         {
-          subtitle: 'Transaction History',
-          text: 'View your transaction history with "show history" or "recent transactions". Get detailed information about a specific transaction with "details [TX_HASH]".'
+          subtitle: 'Phase 3: Scalability & Ecosystem Impact',
+          text: 'Scaling to a robust multi-agent framework with multi-agent coordination, cross-protocol bridging, agent dashboard, event listener, and agent collaboration hub.'
         }
       ]
     },
@@ -62,8 +62,8 @@ const Documentation: React.FC = () => {
       title: 'Additional Resources',
       content: [
         {
-          subtitle: 'Monad Faucet',
-          text: 'Get testnet MONAD tokens from the faucet with "faucet" or "get testnet tokens". The agent will provide instructions on how to claim tokens from the Monad faucet.'
+          subtitle: 'Aptos Testnet Faucet',
+          text: 'Get testnet APT tokens from the faucet with "faucet" or "get testnet tokens". The agent will provide instructions on how to claim tokens from the Aptos testnet faucet.'
         },
         {
           subtitle: 'Help & Support',
@@ -80,7 +80,7 @@ const Documentation: React.FC = () => {
           <div className="mb-10">
             <h1 className="text-4xl font-bold mb-4">Documentation</h1>
             <p className="text-xl text-muted-foreground">
-              Learn how to interact with the Aelix AI agent on Monad Testnet
+              Learn how to interact with the AptosPulse AI agent on Aptos Testnet
             </p>
           </div>
 

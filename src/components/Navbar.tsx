@@ -37,9 +37,7 @@ const Navbar: React.FC = () => {
     <header 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-elastic",
-        isScrolled 
-          ? "bg-background/95 backdrop-blur-lg shadow-sm" 
-          : "bg-background/90 backdrop-blur-md",
+        "bg-background/95 backdrop-blur-lg shadow-sm",
         "border-b border-border/40 py-2"
       )}
     >

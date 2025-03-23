@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowRightIcon, BookOpen } from 'lucide-react';
+import { ArrowRightIcon, BookOpen, Activity } from 'lucide-react';
 import { AnimatedShinyText } from './ui/AnimatedShinyText';
 import { AnimatedGradientText } from './ui/AnimatedGradientText';
 import { usePrivy } from '@privy-io/react-auth';
@@ -90,10 +90,13 @@ const Hero: React.FC = () => {
           ref={titleRef}
           className="text-balance opacity-0 mb-6"
         >
-          <span className="block font-medium text-base md:text-lg text-muted-foreground mb-2 sm:mb-4">Introducing Aelix | AI Agent On Monad</span>
+          <span className="block font-medium text-base md:text-lg text-muted-foreground mb-2 sm:mb-4">
+            <Activity className="inline-block mr-2" size={20} />
+            Introducing AptosPulse | Autonomous Agents for Aptos
+          </span>
           <AnimatedShinyText className="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
             <AnimatedGradientText>
-              Empower Tomorrow: Your AI Ally on Monad Testnet
+              Empower the Future: Autonomous Agents for the Aptos Ecosystem
             </AnimatedGradientText>
           </AnimatedShinyText>
         </h1>
@@ -102,7 +105,7 @@ const Hero: React.FC = () => {
           ref={subtitleRef}
           className="text-balance opacity-0 text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-12"
         >
-          Aelix combines advanced AI capabilities with the power of Monad blockchain to create a seamless, intuitive experience for managing digital assets.
+          AptosPulse combines advanced autonomous agent capabilities with the power of Aptos blockchain to create a seamless, intuitive experience for managing digital assets.
         </p>
         
         <div 

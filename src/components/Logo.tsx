@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
+import { Activity } from 'lucide-react';
 
 interface LogoProps {
   className?: string;
@@ -9,11 +10,10 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ className }) => {
   return (
     <div className={cn("flex items-center gap-2", className)}>
-      <img 
-        src="/lovable-uploads/83658abf-c342-42b2-9279-82b780dec951.png" 
-        alt="Aelix Logo" 
-        className="h-16 sm:h-20 md:h-24 w-auto" 
-      />
+      <div className="flex items-center">
+        <Activity size={32} className="text-primary mr-2" />
+        <span className="text-xl font-bold">AptosPulse</span>
+      </div>
     </div>
   );
 };
