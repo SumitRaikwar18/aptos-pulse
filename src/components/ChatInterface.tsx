@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Send } from 'lucide-react';
-import { sendMessageToAgent } from '@/utils/monadAgent';
+import { sendMessageToAgent } from '@/utils/aptosAgent';
 import { toast } from '@/hooks/use-toast';
 
 interface Message {
